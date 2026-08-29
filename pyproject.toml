@@ -1,0 +1,68 @@
+[project]
+name = "aimm"
+version = "0.1.0"
+description = "aimm - AI Meaning Maps"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.42.0",
+    # Required, despite nothing here importing it: deepgaze_pytorch/__init__.py
+    # pulls in its MSDB model, whose feature extractor imports clip at module
+    # level. "import deepgaze_pytorch" in scripts/get_deepgaze_maps.py fails
+    # without it. Do not drop it as unused.
+    #
+    # Both come from git, via [tool.uv.sources] below, and both are needed only
+    # by scripts/get_deepgaze_maps.py -- nothing else here imports torch either,
+    # and the DeepGaze maps ship in the data record, so reproducing the paper
+    # never builds them. pip does not read [tool.uv.sources]: it resolves these
+    # two names against PyPI, where "deepgaze-pytorch" does not exist (so
+    # `pip install -e .` fails outright) and "clip" is an unrelated CLI
+    # clipboard manager. Install with `uv sync`.
+    "clip",
+    "deepgaze-pytorch",
+    "einops>=0.8.2",
+    "google-genai>=0.3.0",
+    "google-generativeai>=0.8.3",
+    "ipywidgets>=8.1.5",
+    "jupyterlab>=4.3.4",
+    "jupytext>=1.16.6",
+    "matplotlib>=3.10.0",
+    "openai>=1.99.1",
+    "opencv-python>=4.11.0.86",
+    "openpyxl>=3.1.5",
+    "pandas>=2.2.3",
+    "pyarrow>=18.1.0",
+    "scikit-image>=0.25.2",
+    "scikit-learn==1.6.1",
+    "scipy>=1.14.1",
+    "seaborn>=0.13.2",
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "tqdm>=4.67.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# The import package is src/, which no longer matches the distribution name,
+# so hatchling has to be told what to ship. Notebooks keep importing `src`.
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+    "pypatree>=0.4.0",
+]
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+torchvision = [{ index = "pytorch-cpu" }]
+deepgaze-pytorch = { git = "https://github.com/matthias-k/DeepGaze" }
+clip = { git = "https://github.com/openai/CLIP.git" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv
+
+# Credentials
+*key*.txt
+.env
+
+# Scene images and human maps come from their original sources (see
+# docs/DATA_SOURCES.md); the rest of the data record is downloaded. Neither is
+# ever committed.
+data/*/images/
+data/*/patches_orig/
+data/*/maps/
+
+# Results come from the data record - except the TEST example's own outputs.
+#
+# Two rules to respect when editing the section below. Git applies the LAST
+# matching line, so a negation must come after whatever excludes the path; and
+# git will not descend into an excluded directory to re-include anything inside
+# it, which is why these step down one level at a time instead of a single
+# `results/`.
+results/*
+!results/results_scores/
+results/results_scores/*
+!results/results_scores/results_TEST_original.parquet
+!results/results_maps/
+results/results_maps/*
+!results/results_maps/TEST/
+!results/results_comparisons/
+results/results_comparisons/*
+!results/results_comparisons/TEST/
+
+# TEST is the bundled example dataset, tracked so the quick start runs without
+# downloading anything: images, DeepGaze reference maps, ratings and the maps
+# reconstructed from them. Its patches are the exception - notebook 1 recreates
+# them, which is step 1 of the quick start.
+!data/TEST/images/
+!data/TEST/maps/
+
+# Everything else under data/ is tracked: the patch-coordinate CSVs and the
+# center-bias template define the expected layout and are part of the repo.
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db

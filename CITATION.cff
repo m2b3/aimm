@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+title: "AIMM - zero-shot AI meaning maps"
+message: "If you use this software, please cite the associated paper."
+type: software
+authors:
+  - family-names: Jurewicz
+    given-names: Katarzyna
+    affiliation: "Department of Physiology, McGill University, Montreal, QC, Canada"
+  - family-names: Berreby
+    given-names: "Yohai-Eliel"
+    affiliation: "Department of Physiology, McGill University, Montreal, QC, Canada"
+  - family-names: Krishna
+    given-names: "B. Suresh"
+    affiliation: "Department of Physiology, McGill University, Montreal, QC, Canada"
+license: MIT
+repository-code: "https://github.com/m2b3/aimm"
+preferred-citation:
+  type: article
+  title: "Human-like meaning maps from single-prompt VLM ratings of local scene meaning"
+  authors:
+    - family-names: Jurewicz
+      given-names: Katarzyna
+    - family-names: Berreby
+      given-names: "Yohai-Eliel"
+    - family-names: Krishna
+      given-names: "B. Suresh"
+  year: 2026
+references:
+  - type: data
+    title: "Data for: Human-like meaning maps from single-prompt VLM ratings of local scene meaning"
+    authors:
+      - family-names: Jurewicz
+        given-names: Katarzyna
+      - family-names: Berreby
+        given-names: "Yohai-Eliel"
+      - family-names: Krishna
+        given-names: "B. Suresh"
+    doi: "10.5281/zenodo.22165217"
+    year: 2026
+    notes: "VLM ratings, AI meaning maps, DeepMeaning maps and saliency maps."
